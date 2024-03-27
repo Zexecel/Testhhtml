@@ -1,10 +1,22 @@
 /* style.css */
 
+@keyframes fall {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(calc(100vh - 250px)); }
+}
+
+@keyframes shake {
+    0% { transform: translateX(0); }
+    50% { transform: translateX(-50px); }
+    100% { transform: translateX(50px); }
+}
+
 body {
     font-family: Arial, sans-serif;
     background-color: #f9f9f9;
     margin: 0;
     padding: 0;
+    position: relative; /* Ensure the body acts as the reference for positioning */
 }
 
 .container {
@@ -14,38 +26,7 @@ body {
     background-color: #fff;
     border-radius: 10px;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-    animation: shake 0.1s infinite alternate; /* Faster shake animation */
-    animation-delay: 5s; /* Delay after the image falls */
-}
-
-@keyframes shake {
-    0% { transform: translateX(0); }
-    25% { transform: translateX(-5px); }
-    50% { transform: translateX(5px); }
-    75% { transform: translateX(-5px); }
-    100% { transform: translateX(0); }
-}
-
-img {
-    display: block;
-    width: 100%; /* Make images responsive */
-    max-width: 250px; /* Set maximum width for images */
-    height: auto; /* Maintain aspect ratio */
-    border-radius: 50%;
-    margin: 0 auto 20px;
-    object-fit: cover;
-    object-position: center;
-    animation: fall 2s linear forwards; /* Faster falling animation */
-}
-
-@keyframes fall {
-    0% { transform: translateY(-1000px); }
-    100% { transform: translateY(0); }
-}
-
-/* Hide the image after falling */
-img.hidden {
-    display: none;
+    animation: shake 0.2s infinite; /* Apply shake animation */
 }
 
 h1 {
@@ -57,6 +38,15 @@ h1 {
 p {
     color: #666;
     line-height: 1.6;
+}
+
+img {
+    position: absolute;
+    width: 250px;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    animation: fall 5s forwards;
 }
 
 ul {
@@ -97,7 +87,7 @@ a:hover {
 }
 
 .video-container iframe {
-    width: 100%; /* Make videos responsive */
+    width: 100%;
     height: auto;
 }
 
@@ -108,26 +98,4 @@ ul {
 
 li {
     margin-bottom: 10px;
-}
-
-/* Media queries for responsive design */
-
-/* For devices with a maximum width of 768px (tablets) */
-@media (max-width: 768px) {
-    .container {
-        padding: 20px;
-    }
-    h1 {
-        font-size: 24px;
-    }
-}
-
-/* For devices with a maximum width of 480px (phones) */
-@media (max-width: 480px) {
-    .container {
-        padding: 10px;
-    }
-    h1 {
-        font-size: 20px;
-    }
 }
